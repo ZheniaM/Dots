@@ -2,6 +2,9 @@ from opponents.opponent import Opponent
 from screens.screen import Screen
 from screens.button import Button
 from screens.pause import Pause
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 
 
 class Game(Screen):
@@ -15,6 +18,14 @@ class Game(Screen):
         self.__opponent: Opponent = opponent
         self.__score: int = 0
         self.__active: bool = True
+        
+        self.title = "Game Screen"
+        self.width, self.height = 400, 300
+        
+        self.window = QWidget()
+        self.layout = QVBoxLayout()
+        self.window.setLayout(self.layout)
+        #Might consider moving it to screen
 
         self.__pause = Button(0, 0, 50, 50, "Pause")
         self.__pause.clicked.connect(self.__pause_clicked)
@@ -27,4 +38,4 @@ class Game(Screen):
         print(f"{self.__score=}")
 
     def draw(self) -> None:
-        return super().draw()  # TODO
+        super().draw([self.__pause])
