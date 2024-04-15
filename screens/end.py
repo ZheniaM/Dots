@@ -3,9 +3,7 @@ from screens.button import Button
 from screens.game import Game
 from screens.screen import Screen
 from screens.title import Title
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QWidget, QVBoxLayout
 
 
 class End(Screen):
@@ -13,14 +11,14 @@ class End(Screen):
         super().__init__(self)
         self.__size: tuple[int, int] = size
         self.__opponent: Opponent = opponent
-        
+
         self.title = "End Screen"
         self.width, self.height = 400, 300
-        
+
         self.window = QWidget()
         self.layout = QVBoxLayout()
         self.window.setLayout(self.layout)
-        #Might consider moving it to screen
+        # Might consider moving it to screen
 
         self.__exit: Button = Button(0, 0, 0, 0, "Exit")
         self.__try_over: Button = Button(0, 0, 0, 0, "Try again")
@@ -29,6 +27,12 @@ class End(Screen):
         self.__exit.clicked.connect(self.__exit_clicked)
         self.__try_over.clicked.connect(self.__try_over_clicked)
         self.__to_title.clicked.connect(self.__to_title_clicked)
+
+        self.__buttons: list[Button] = [
+            self.__exit,
+            self.__try_over,
+            self.__to_title
+        ]
 
     def __exit_clicked(self) -> None:
         print("exit clicked")
@@ -43,4 +47,8 @@ class End(Screen):
         self.next_screen = Title()
 
     def draw(self, bu) -> None:
-        super().draw([self.__exit, self.__try_over, self.__to_title])
+        self.window.setWindowTitle(self.title)
+        self.window.resize(self.width, self.height)
+        for button in self.__buttons:
+            self.layout.addWidget(button)
+        self.window.show()
