@@ -25,8 +25,6 @@ class GameState:
             self.__board[y][x] = metadata.second_p_dot
         self.active = not self.active
 
-    # def
-
     def log(self) -> None:
         ic(self.__board)
 
