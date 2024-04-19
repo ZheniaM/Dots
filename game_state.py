@@ -3,6 +3,7 @@ from typing import Any, Generator
 from opponents.opponent import Opponent
 from icecream.icecream import ic
 import metadata
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
 
 
 class GameState:
@@ -27,8 +28,11 @@ class GameState:
 
     def log(self) -> None:
         ic(self.__board)
+        
+    def get_board(self):
+        return self.__board
 
-    def opponent_make_turn(self):
+    def opponent_make_turn(self) -> list[list[int]]:
         x, y = self.opponent.make_turn(self.__board)
         self.set_dot(x, y)
 
