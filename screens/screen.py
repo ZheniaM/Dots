@@ -1,8 +1,13 @@
 from __future__ import annotations
 from abc import ABC
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLineEdit, QMessageBox, QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QLineEdit,
+    QMessageBox,
+    QTableWidget,
+    QTableWidgetItem)
 from PyQt5.QtGui import QColor
-from termcolor import colored
 
 from game_state import GameState
 from opponents.bot import Bot
@@ -141,7 +146,7 @@ class Game(Screen):
         self.__le_xy: QLineEdit = QLineEdit(self.parrent)
         self.__le_xy.setInputMask("00 00;_")
         self.__le_xy.returnPressed.connect(self.__xy_return_pressed)
-        
+
         self.__table = QTableWidget()
 
         self.__widgets: list[Button] = [
@@ -184,13 +189,13 @@ class Game(Screen):
         for widget in self.__widgets:
             self.layout.addWidget(widget)
         self.parrent.show()
-        
+
     def set_table(self):
         data = self.__game_state.get_board()
         self.__table.setRowCount(len(data))
         self.__table.setColumnCount(len(data[0]))
-        #cell_width = 20
-        #cell_height = 20
+        # cell_width = 20
+        # cell_height = 20
         for i, row in enumerate(data):
             for j, val in enumerate(row):
                 item = QTableWidgetItem(str("*"))
@@ -201,11 +206,11 @@ class Game(Screen):
                 else:
                     color = QColor("white")
                 item.setForeground(color)
-                
+
                 self.__table.setItem(i, j, item)
-                #for i in range(len(data)):
+                # for i in range(len(data)):
                 #    self.__table.setRowHeight(i, cell_height)
-                #for j in range(len(data[0])):
+                # for j in range(len(data[0])):
                 #    self.__table.setColumnWidth(j, cell_width)
 
 

@@ -9,7 +9,7 @@ class Dots(QMainWindow):
     def __init__(self) -> None:
         super(Dots, self).__init__(None)
         self.setGeometry(500, 100, 0, 0)
-        # self.showMaximized()
+        self.showMaximized()
         self.__screen: Screen = Title(self)
         self.__timer = QTimer()
         self.__timer.timeout.connect(self.__main)
