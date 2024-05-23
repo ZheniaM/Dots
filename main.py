@@ -18,7 +18,7 @@ class Dots(QMainWindow):
     def __main(self) -> None:
         # print(self.__screen)
         self.__screen = self.__screen.next_screen
-        self.setCentralWidget(self.__screen.parrent)
+        self.setCentralWidget(self.__screen.parent)
         self.__screen.draw()
 
 

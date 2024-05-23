@@ -1,4 +1,4 @@
-from typing import Any, Generator, Tuple
+from typing import Any, Generator, Tuple, Set
 
 from opponents.opponent import Opponent
 # from icecream.icecream import ic
@@ -36,9 +36,11 @@ class GameState:
         x, y = self.opponent.make_turn(self.__board)
         self.set_dot(x, y)
 
-    def __get_neighbours(self, x: int, y: int
+    def get_neighbours(points: Set[Tuple[int, int]]
                          ) -> Generator[Tuple[int, int], Any, None]:
-        x_size, y_size = self.size
-        for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
-            if 0 <= x + dx < x_size and 0 <= y + dy < y_size:
-                yield (x + dx, y + dy)
+        x_size = 10
+        y_size = 10
+        for x, y in points:
+            for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+                if 0 <= x + dx < x_size and 0 <= y + dy < y_size:
+                    yield (x + dx, y + dy)
