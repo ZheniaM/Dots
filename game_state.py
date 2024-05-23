@@ -1,4 +1,4 @@
-from typing import Any, Generator
+from typing import Any, Generator, Tuple
 
 from opponents.opponent import Opponent
 # from icecream.icecream import ic
@@ -6,7 +6,7 @@ import metadata
 
 
 class GameState:
-    def __init__(self, size: tuple[int, int], opponent: Opponent) -> None:
+    def __init__(self, size: Tuple[int, int], opponent: Opponent) -> None:
         self.size: tuple[int, int] = size
         self.__board: list[list[int]] = [
             [0 for j in range(self.size[1])]
@@ -37,7 +37,7 @@ class GameState:
         self.set_dot(x, y)
 
     def __get_neighbours(self, x: int, y: int
-                         ) -> Generator[tuple[int, int], Any, None]:
+                         ) -> Generator[Tuple[int, int], Any, None]:
         x_size, y_size = self.size
         for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
             if 0 <= x + dx < x_size and 0 <= y + dy < y_size:
