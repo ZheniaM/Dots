@@ -176,7 +176,15 @@ class Game(Screen):
 
     def __make_turn(self, x: int = 0, y: int = 0) -> None:
         if self.__game_state.active:
-            self.__game_state.set_dot(x, y)
+            try:
+                self.__game_state.set_dot(x, y)
+                if self.__game_state.empty_spaces == 0:
+                    self.next_screen = End(self.parent,
+                                           self.__game_state.size,
+                                           self.__game_state.opponent)
+            except ValueError:
+                ...
+
         else:
             self.__game_state.opponent_make_turn()
 

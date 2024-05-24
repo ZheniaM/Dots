@@ -15,6 +15,7 @@ class GameState:
         self.opponent: Opponent = opponent
         self.__score: int = 0
         self.active: int = True
+        self.empty_spaces = size[0] * size[1]
 
     def set_dot(self, x: int, y: int) -> None:
         if self.__board[y][x]:
@@ -23,6 +24,7 @@ class GameState:
             self.__board[y][x] = metadata.first_p_dot
         else:
             self.__board[y][x] = metadata.second_p_dot
+        self.empty_spaces -= 1
         self.active = not self.active
 
     def log(self) -> None:
