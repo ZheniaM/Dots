@@ -51,5 +51,9 @@ class Bot(Opponent):
         else:
             near_self_cells = list(self.__near_self_cells())
             near_bot_cells = list(self.__near_bot_cells())
-            return choice(near_bot_cells + near_self_cells)
+            coordinates = []
+            for i in near_bot_cells + near_self_cells:
+                if i in empty_cells:
+                    coordinates.append(i)
+            return choice(coordinates)
 
