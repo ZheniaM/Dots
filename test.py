@@ -44,5 +44,65 @@ class TestScreens(unittest.TestCase):
     def tearDown(self):
         self.app.quit()
 
+
+class TestBot(unittest.TestCase):
+    def setUp(self) -> None:
+        self.bot = Bot()
+
+    def test_get_empty_cells(self):
+        board = [
+            [0, 0, 16],
+            [32, 16, 0],
+            [0, 0, 0]
+        ]
+        self.bot._Bot__board = board
+        empty_cells = self.bot._Bot__get_empty_cells()
+        expected_empty_cells = {(0, 0), (1, 0), (2, 2), (0, 2), (1, 2), (2, 2), (2, 1)}
+        self.assertEqual(empty_cells, expected_empty_cells)
+
+    def test_get_self_cells(self):
+        board = [
+            [0, 0, 16],
+            [32, 16, 0],
+            [0, 0, 0]
+        ]
+        self.bot._Bot__board = board
+        self_cells = self.bot._Bot__get_self_cells()
+        expected_self_cells = {(2, 0), (1, 1)}
+        self.assertEqual(self_cells, expected_self_cells)
+
+    def test_get_bot_cells(self):
+        board = [
+            [0, 0, 16],
+            [32, 16, 0],
+            [0, 0, 0]
+        ]
+        self.bot._Bot__board = board
+        bot_cells = self.bot._Bot__get_bot_cells()
+        expected_bot_cells = {(0, 1)}
+        self.assertEqual(bot_cells, expected_bot_cells)
+
+    def test_near_bot_cells(self):
+        board = [
+            [0, 0, 16],
+            [32, 16, 0],
+            [0, 0, 0]
+        ]
+        self.bot._Bot__board = board
+        near_bot_cells = set(self.bot._Bot__near_bot_cells())
+        expected_near_bot_cells = {(0, 0), (0, 2), (1, 1)}
+        self.assertEqual(near_bot_cells, expected_near_bot_cells)
+
+    def test_near_self_cells(self):
+        board = [
+            [0, 0, 16],
+            [32, 16, 0],
+            [0, 0, 0]
+        ]
+        self.bot._Bot__board = board
+        near_self_cells = set(self.bot._Bot__near_self_cells())
+        expected_near_self_cells = {(1, 0), (2, 1), (0, 1), (1, 2), (3, 0)}
+        self.assertEqual(near_self_cells, expected_near_self_cells)
+
 if __name__ == '__main__':
     unittest.main()
